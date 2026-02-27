@@ -1,0 +1,108 @@
+{
+  "name": "maharajah",
+  "displayName": "Maharajah Semantic Search",
+  "description": "Semantic code search powered by the maharajah local search engine",
+  "version": "0.1.0",
+  "publisher": "danslapman",
+  "private": true,
+  "engines": {
+    "vscode": "^1.95.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "maharajah.search",
+        "title": "Maharajah: Semantic Search"
+      },
+      {
+        "command": "maharajah.startServer",
+        "title": "Maharajah: Start Server"
+      },
+      {
+        "command": "maharajah.stopServer",
+        "title": "Maharajah: Stop Server"
+      },
+      {
+        "command": "maharajah.restartServer",
+        "title": "Maharajah: Restart Server"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "maharajah.search",
+        "key": "ctrl+shift+m",
+        "mac": "cmd+shift+m"
+      }
+    ],
+    "configuration": {
+      "title": "Maharajah",
+      "properties": {
+        "maharajah.binaryPath": {
+          "type": "string",
+          "default": "mh",
+          "description": "Path to the maharajah (mh) binary. Defaults to 'mh' assuming it is on PATH.",
+          "scope": "machine-overridable"
+        },
+        "maharajah.port": {
+          "type": "number",
+          "default": 8080,
+          "minimum": 1,
+          "maximum": 65535,
+          "description": "Port the maharajah server listens on.",
+          "scope": "resource"
+        },
+        "maharajah.host": {
+          "type": "string",
+          "default": "127.0.0.1",
+          "description": "Host the maharajah server binds to.",
+          "scope": "resource"
+        },
+        "maharajah.autoStart": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically start the maharajah server when VS Code activates.",
+          "scope": "resource"
+        },
+        "maharajah.searchLimit": {
+          "type": "number",
+          "default": 20,
+          "minimum": 1,
+          "maximum": 100,
+          "description": "Maximum number of search results to fetch from maharajah.",
+          "scope": "resource"
+        },
+        "maharajah.debounceMs": {
+          "type": "number",
+          "default": 300,
+          "minimum": 50,
+          "maximum": 2000,
+          "description": "Debounce delay in milliseconds before querying maharajah as the user types.",
+          "scope": "resource"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "npm run check-types && node esbuild.js",
+    "watch": "npm-run-all -p watch:esbuild watch:tsc",
+    "watch:esbuild": "node esbuild.js --watch",
+    "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
+    "package": "npm run check-types && node esbuild.js --production",
+    "check-types": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "^20.x",
+    "@types/vscode": "^1.95.0",
+    "esbuild": "^0.25.0",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^5.6.0"
+  }
+}
