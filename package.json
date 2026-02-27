@@ -98,6 +98,10 @@
     "package": "npm run check-types && node esbuild.js --production",
     "check-types": "tsc --noEmit"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/danslapman/maharajah-vscode.git"
+  },
   "devDependencies": {
     "@types/node": "^20.x",
     "@types/vscode": "^1.95.0",
